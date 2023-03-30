@@ -257,3 +257,9 @@ Main As screen:
         Y: =1047
         ZIndex: =14
 
+    Button10 As button:
+        Text: ="Button"
+        X: =128
+        Y: =390
+        ZIndex: =15
+
