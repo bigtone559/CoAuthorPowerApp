@@ -1,0 +1,656 @@
+POScreen As screen:
+
+    Image1_2 As image:
+        Height: =1620
+        Image: =gradient_color_blue_155118_1600x900
+        ImagePosition: =ImagePosition.Fill
+        Width: =2160
+        ZIndex: =1
+
+    Rectangle1_7 As rectangle:
+        BorderColor: =RGBA(255, 255, 255, 1)
+        BorderThickness: =2
+        Fill: =RGBA(0, 0, 0, 0)
+        Height: =744
+        Width: =816
+        X: =64
+        Y: =282
+        ZIndex: =2
+
+    InputComp_1 As dropdown:
+        ChevronBackground: =RGBA(0, 13, 75, 1)
+        Font: =Font.Verdana
+        Height: =67
+        Items: =["","Corp", "EE", "Group"]
+        OnChange: |-
+            =Set(compVar,InputComp_1.Selected.Value);
+            
+            ClearCollect(colCompData,Filter(GrowerList_1,Comp=compVar))
+        PaddingRight: =15.81
+        PaddingTop: =15.81
+        Reset: =resetVar
+        Size: =25
+        Width: =261
+        X: =95
+        Y: =379
+        ZIndex: =3
+
+    InputGro_1 As dropdown:
+        ChevronBackground: =RGBA(0, 13, 75, 1)
+        Font: =Font.Verdana
+        Height: =75
+        Items: |-
+            =SortByColumns( ForAll(Distinct(colCompData,NAME), {Result: ThisRecord.Value}),"Result")
+        PaddingRight: =15.81
+        PaddingTop: =15.81
+        Reset: =resetVar
+        Size: =25
+        Width: =747
+        X: =95
+        Y: =517
+        ZIndex: =4
+
+    Label1_28 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.Verdana
+        Height: =71
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =25
+        Text: =If(spanVar=false, "Grower", "Cultivador")
+        Width: =630
+        X: =95
+        Y: =446
+        ZIndex: =5
+
+    InputNotes2_1 As text:
+        Default: =""
+        Font: =Font.Verdana
+        Height: =182
+        HintText: =If(spanVar=false, "Type your notes here", "Escriba sus notas aqui")
+        MaxLength: =500
+        Mode: =TextMode.MultiLine
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Reset: =resetVar
+        Size: =20
+        Width: =747
+        X: =95
+        Y: =811
+        ZIndex: =6
+
+    Label1_33 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.Verdana
+        Height: =66
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =25
+        Text: =If(spanVar=false, "Notes", "Notas")
+        Width: =630
+        X: =95
+        Y: =745
+        ZIndex: =7
+
+    Label1_27 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.Verdana
+        Height: =71
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =25
+        Text: =If(spanVar=false, "Company", "Compania")
+        Width: =249
+        X: =95
+        Y: =308
+        ZIndex: =8
+
+    Label1_26 As label:
+        Align: =Align.Center
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.Verdana
+        Height: =75
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =25
+        Text: =If(spanVar=false, "Type of Assistance Required", "Tipo de asistencia requerida")
+        Width: =493
+        X: =1254
+        Y: =176
+        ZIndex: =9
+
+    InputRanch_1 As text:
+        Default: =""
+        Font: =Font.Verdana
+        Height: =75
+        HintText: =""
+        MaxLength: =500
+        Mode: =TextMode.MultiLine
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Reset: =resetVar
+        Size: =25
+        Width: =297
+        X: =95
+        Y: =657
+        ZIndex: =10
+
+    Label1_32 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.Verdana
+        Height: =61
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =25
+        Text: =If(spanVar=false, "Ranch", "Rancho")
+        Width: =297
+        X: =95
+        Y: =592
+        ZIndex: =11
+
+    Rectangle2_5 As rectangle:
+        BorderColor: =RGBA(255, 255, 255, 1)
+        BorderThickness: =2
+        Fill: =RGBA(0, 0, 0, 1)
+        Height: =134
+        Width: =2160.00
+        ZIndex: =12
+
+    Image3_6 As image:
+        Height: =134
+        Image: ='house-1.1s-200px (5)'
+        OnSelect: |-
+            =Navigate(Main);
+            Set(numberVar, false);
+            Set(itemresetVar, true);
+            Set(itemresetVar, false);
+            Set(myselfVar, false);
+            Clear(colHeaderMain);
+            Clear(colRequestItemsList);
+            Clear(colRequestMaterials)
+        PaddingRight: =0.00
+        PaddingTop: =0.00
+        Width: =156
+        X: =2004
+        ZIndex: =13
+
+    Label1_29 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.Verdana
+        Height: =134
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =39.53
+        Text: ="Welcome, " & User().FullName & "!"
+        Width: =1640
+        X: =179
+        ZIndex: =14
+
+    "Gallery2_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        BorderColor: =RGBA(255, 255, 255, 1)
+        BorderThickness: =2
+        Height: =859
+        Items: |-
+            =//Filter(RequestMaterials, TypeOfMaterial=InputType.Selected.Value)
+            colRequestMaterials
+        Layout: =Layout.Vertical
+        ShowScrollbar: =false
+        TemplateFill: =RGBA(0,0,0,0)
+        TemplatePadding: =0
+        TemplateSize: =Min(160, Self.Height - 60)
+        Width: =1156
+        X: =922
+        Y: =274
+        ZIndex: =15
+
+        Rectangle5 As rectangle:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =128
+            OnSelect: =Select(Parent)
+            Width: =128
+            X: =16
+            Y: =16
+            ZIndex: =1
+
+        Image8_2 As image:
+            BorderColor: =RGBA(102, 182, 227, 1)
+            BorderThickness: =2
+            Height: =128
+            Image: =ThisItem.Thumbnail.Large
+            OnSelect: =Select(Parent)
+            Width: =128
+            X: =16
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =2
+
+        Title2_1 As label:
+            Color: =RGBA(255, 255, 255, 1)
+            Font: =Font.Verdana
+            FontWeight: =FontWeight.Normal
+            Height: =128
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =25
+            Text: =If(spanVar=false, ThisItem.Material, ThisItem.SpanishMaterial)
+            VerticalAlign: =VerticalAlign.Top
+            Width: =361
+            X: =173
+            Y: =16
+            ZIndex: =3
+
+        Separator2_1 As rectangle:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =4
+
+        Button3_6 As button:
+            BorderColor: =RGBA(153, 207, 236, 1)
+            Color: =RGBA(102, 182, 227, 1)
+            Fill: =RGBA(0, 0, 0, 0)
+            Font: =Font.Verdana
+            Height: =97
+            OnSelect: |-
+                =If(
+                    IsBlank(Gallery2_1.Selected.InputQuantity_1), Notify("Please enter a quantity to request first", NotificationType.Error),
+                
+                Collect(
+                    colRequestItemsList,
+                    {
+                        Title: InputComp_1.Selected.Value & InputGro_1.Selected.Result & Substitute(Substitute(Substitute(User().FullName &                      Now()," ",""),"/",""),":",""),
+                        UID: "x", 
+                        Material: ThisItem.Material,
+                        SpanishMaterial: ThisItem.SpanishMaterial,
+                        TypeOfMaterial: ThisItem.TypeOfMaterial,
+                        SpanishType: ThisItem.SpanishType,
+                        HowMany: Value(InputQuantity_1.Text),
+                        NumberAttained: 0,
+                        Submitter: User().FullName,
+                        Status: "Submitted",
+                        CostEach: Value(Text(ThisItem.Cost,"[$-en-US]0.00")),
+                        Amount: Value(Text(InputQuantity_1.Text)*ThisItem.Cost, "[$-en-US]0.00")
+                    }
+                )
+                ;
+                Patch(colRequestMaterials, First(Filter(colRequestMaterials, Material=ThisItem.Material)),
+                    {
+                        Confirmation: true
+                    }
+                )
+                )
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =25
+            Text: =If(spanVar=false, "Confirm", "Confirmar")
+            Width: =170
+            X: =968
+            Y: =34
+            ZIndex: =5
+
+        InputQuantity_1 As text:
+            Align: =Align.Center
+            Default: =""
+            Font: =Font.Verdana
+            Format: =TextFormat.Number
+            Height: =75
+            HintText: ="Qty"
+            OnSelect: =Select(Parent)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Reset: =itemresetVar
+            Size: =25
+            Width: =137
+            X: =592
+            Y: =42
+            ZIndex: =6
+
+        Button3_5 As button:
+            BorderColor: =RGBA(184, 0, 0, 1)
+            Color: =RGBA(184, 0, 0, 1)
+            Fill: =RGBA(0, 0, 0, 0)
+            Font: =Font.Verdana
+            Height: =97
+            OnSelect: |-
+                =Remove( colRequestItemsList, First(Filter(colRequestItemsList, Material=ThisItem.Material)));
+                Set(itemresetVar, true);
+                Set(itemresetVar, false);
+                Patch(colRequestMaterials, First(Filter(colRequestMaterials, Material=ThisItem.Material)),
+                    {
+                        Confirmation: false
+                    }
+                )
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =25
+            Text: =If(spanVar=false, "Cancel", "Cancellar")
+            Width: =170
+            X: =773
+            Y: =34
+            ZIndex: =7
+
+        Label4_2 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(255, 255, 255, 1)
+            BorderThickness: =2
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(0, 0, 0, 1)
+            Font: =Font.Verdana
+            Height: =78
+            OnSelect: =Select(Parent)
+            Size: =25
+            Text: =First(Filter(colRequestItemsList, Material=ThisItem.Material)).HowMany
+            Visible: =If(ThisItem.Confirmation=true, true, false)
+            Width: =137
+            X: =592
+            Y: =43
+            ZIndex: =8
+
+    DataTable1_1 As dataTable.datatable:
+        BorderColor: =RGBA(255, 255, 255, 1)
+        BorderStyle: =BorderStyle.Solid
+        BorderThickness: =2
+        Color: =RGBA(255, 255, 255, 1)
+        DisplayMode: =DisplayMode.Edit
+        Fill: =RGBA(0, 0, 0, 0)
+        Font: =Font.Verdana
+        HeadingFill: =RGBA(39, 67, 125, 1)
+        HeadingFont: =Font.Verdana
+        Height: =329
+        HoverColor: =RGBA(255, 255, 255, 1)
+        Items: =colRequestItemsList
+        SelectedColor: =RGBA(255, 255, 255, 1)
+        Size: =22
+        Width: =1156
+        X: =922
+        Y: =1164
+        ZIndex: =16
+
+        TypeOfMaterial_Column1_1 As dataTableColumn.textualColumn:
+            AutoWidth: =false
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="TypeOfMaterial"
+            FieldName: ="TypeOfMaterial"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =1
+            Text: =If(spanVar=false, ThisItem.TypeOfMaterial, ThisItem.SpanishType)
+            Width: =329
+            X: =0
+            Y: =0
+            ZIndex: =9
+
+        Material_Column1_1 As dataTableColumn.textualColumn:
+            AutoWidth: =false
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Material"
+            FieldName: ="Material"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =2
+            Text: =If(spanVar=false, ThisItem.Material, ThisItem.SpanishMaterial)
+            Width: =403
+            X: =359
+            Y: =0
+            ZIndex: =10
+
+        HowMany_Column1_1 As dataTableColumn.textualColumn:
+            AutoWidth: =false
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="HowMany"
+            FieldName: ="HowMany"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =3
+            Text: =ThisItem.HowMany
+            Width: =422
+            X: =1029
+            Y: =0
+            ZIndex: =11
+
+    RequestButton_1 As button:
+        BorderColor: =RGBA(255, 255, 255, 1)
+        Fill: =RGBA(136, 160, 209, 0)
+        Font: =Font.Verdana
+        Height: =96
+        OnSelect: |-
+            =If(
+                Or(
+                    ComboBox1_1.Selected.TypeOfMaterial="", 
+                    ComboBox1_1.Selected.SpanishType="", 
+                    InputComp_1.Selected.Value="", 
+                    CountRows(colRequestItemsList)=0
+                    ), 
+                    Notify("Please fill out all entries and select a request item before submitting a request.", NotificationType.Error),
+            
+            Set(spinnerVar, true);
+            ClearCollect(
+                colHeaderMain,
+                {
+                    Title:       InputComp_1.Selected.Value & InputGro_1.Selected.Result & Substitute(Substitute(Substitute(User().FullName &                             Now()," ",""),"/",""),":",""),
+                    COMPANY:     InputComp_1.Selected.Value,
+                    GROWER:      InputGro_1.Selected.Result,
+                    SUBMITTER:   User().FullName,
+                    DATE:        Today(),
+                    MODULE:      "PO",
+                    DESCRIPTION: InputNotes2_1.Text,
+                    STATUS:      "Submitted",
+                    LATITUDE:    Location.Latitude,
+                    LONGITUDE:   Location.Longitude
+                }
+            )
+            ;
+            
+            Set(
+                varSK,
+                Patch(
+                    HeaderMain, Defaults(HeaderMain),
+                    {
+                        Title:       First(colHeaderMain).Title,
+                        COMPANY:     First(colHeaderMain).COMPANY,
+                        GROWER:      First(colHeaderMain).GROWER,
+                        SUBMITTER:   First(colHeaderMain).SUBMITTER,
+                        DATE:        First(colHeaderMain).DATE,
+                        MODULE:      First(colHeaderMain).MODULE,
+                        DESCRIPTION: First(colHeaderMain).DESCRIPTION,
+                        STATUS:      First(colHeaderMain).STATUS,
+                        LATITUDE:    First(colHeaderMain).LATITUDE,
+                        LONGITUDE:   First(colHeaderMain).LONGITUDE
+                    }
+                )
+            );
+            
+            UpdateIf(
+                colRequestItemsList,
+                UID="x",
+                {UID: varSK.ID}
+            );
+            
+            Set(
+                POIDvar,
+                Patch(
+                RequestHeader, Defaults(RequestHeader),
+                {
+                    Title:            InputComp_1.Selected.Value & InputGro_1.Selected.Result & Substitute(Substitute(Substitute(User().FullName & Now()," ",""),"/",""),":",""),
+                    UID:              varSK.ID,
+                    Grower:           InputGro_1.Selected.Result,
+                    Company:          InputComp_1.Selected.Value,
+                    Ranch:            InputRanch_1.Text,
+                    Notes:            InputNotes2_1.Text, 
+                    DateNeeded:       Now(),
+                    TimeNeeded:       inputNow.Text,
+                    RequestType:      "PO",
+                    Submitter:        User().FullName,
+                    SelfServe:        true,
+                    Status:           "Submitted",
+                    DateTimeNeeded:   DateValue(If(Hour(Now())>12,Hour(Now())-12,Hour(Now())) & ":"
+            & If(Minute(Now())<10,"0"&Text(Minute(Now())),Text(Minute(Now()))) & " "
+            & If(Hour(Now())>11,"PM","AM")),
+                    AcceptedBy:       User().FullName,
+                    TotalCost:        Sum(colRequestItemsList, Amount),
+                    Contact:          "PO"
+                       }
+            ));
+            
+            ClearCollect(colRequestHeader, {
+                    Title:                InputComp_1.Selected.Value & InputGro_1.Selected.Result & Substitute(Substitute(Substitute(User().FullName & Now()," ",""),"/",""),":",""),
+                    UID:              varSK.ID,
+                    Grower:           InputGro_1.Selected.Result,
+                    Company:          InputComp_1.Selected.Value,
+                    Ranch:            InputRanch_1.Text,
+                    Notes:            InputNotes2_1.Text, 
+                    DateNeeded:       Now(),
+                    TimeNeeded:       inputNow.Text,
+                    RequestType:      "PO",
+                    Submitter:        User().FullName,
+                    Status:           "Submitted",
+                    DateTimeNeeded:   DateValue(If(Hour(Now())>12,Hour(Now())-12,Hour(Now())) & ":"
+            & If(Minute(Now())<10,"0"&Text(Minute(Now())),Text(Minute(Now()))) & " "
+            & If(Hour(Now())>11,"PM","AM")),
+                    AcceptedBy:       User().FullName,
+                    TotalCost:        "$" & Text(Sum(colRequestItemsList, Amount), "[$-en-US]0.00"),
+                    POIDvar:          POIDvar.ID,
+                    Email:            User().Email
+                       }
+            );
+            
+            //Collect(RequestItemsList, colRequestItemsList);
+            
+            Patch(RequestItemsList,
+                ForAll(colRequestItemsList,
+                {
+                    Title: Title,
+                    Material: Material,
+                    UID: UID,
+                    TypeOfMaterial: TypeOfMaterial,
+                    CostEach: CostEach,
+                    Submitter: Submitter,
+                    HowMany: HowMany,
+                    Amount: Amount,
+                    Status: "Submitted",
+                    SpanishMaterial: SpanishMaterial,
+                    SpanishType: SpanishType
+                    }
+                )
+                );
+            
+            '[POv1]'.Run(JSON(colRequestHeader), JSON(colRequestItemsList));
+            
+            Clear(colHeaderMain);
+            Clear(colRequestItemsList);
+            Clear(colRequestMaterials);
+            Set(resetVar, true);
+            Set(resetVar, false);
+            Set(itemresetVar, true);
+            Set(itemresetVar, false);
+            Set(myselfVar, false);
+            
+            Notify("P.O. Request successfully submitted", NotificationType.Success);
+            Set(spinnerVar, false)
+            )
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =40
+        Text: =If(spanVar=false, "REQUEST!", "Solicitud!")
+        Visible: =If(myselfVar=true, false, true)
+        Width: =1155
+        X: =923
+        Y: =1509
+        ZIndex: =17
+
+    Image6_3 As image:
+        Height: =113
+        Image: ='MicrosoftTeams-image (13)'
+        Width: =132
+        X: =34
+        Y: =10
+        ZIndex: =18
+
+    Image11_1 As image:
+        Height: =1620
+        Image: ='Eclipse-1s-200px'
+        Visible: =spinnerVar
+        Width: =2160
+        ZIndex: =19
+
+    ComboBox1_1 As combobox:
+        ChevronBackground: =RGBA(0, 16, 96, 1)
+        DisplayFields: =If(spanVar=false, ["TypeOfMaterial"], ["SpanishType"])
+        Font: =Font.Verdana
+        Height: =80
+        IsSearchable: =false
+        Items: =RequestTypes
+        OnChange: |-
+            =ClearCollect(
+                colRequestMaterials,
+                Filter(
+                    RequestMaterials,
+                    TypeOfMaterial=ComboBox1_1.Selected.TypeOfMaterial
+                )
+            )
+        Reset: =resetVar
+        SearchFields: =["ComplianceAssetId"]
+        SearchItems: =[]
+        SelectMultiple: =false
+        Size: =25
+        Width: =330
+        X: =1747
+        Y: =174
+        ZIndex: =20
+
+    Label1_30 As label:
+        Align: =Align.Center
+        Color: =RGBA(255, 255, 0, 1)
+        Font: =Font.Verdana
+        Height: =56
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =25
+        Text: ="Tap the delivery location on the map"
+        Visible: =locationvisVar
+        Width: =630
+        X: =1211
+        Y: =112
+        ZIndex: =21
+
+    inputNow As label:
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.Verdana
+        Height: =112
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =39.53
+        Text: |-
+            =If(Hour(Now())>12,Hour(Now())-12,Hour(Now())) & ":"
+            & If(Minute(Now())<10,"0"&Text(Minute(Now())),Text(Minute(Now()))) & " "
+            & If(Hour(Now())>11,"PM","AM")
+        Width: =292
+        X: =64
+        Y: =168
+        ZIndex: =22
+

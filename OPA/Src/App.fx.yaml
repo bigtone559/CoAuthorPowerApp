@@ -1,0 +1,7 @@
+App As appinfo:
+    BackEnabled: =false
+    OnStart: |-
+        =Set(numberVar, false);
+        Set(amVar, "");
+        Set(spanVar, false)
+

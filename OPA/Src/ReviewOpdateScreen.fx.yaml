@@ -1,0 +1,163 @@
+ReviewOpdateScreen As screen:
+    BackgroundImage: =
+    Fill: =RGBA(0, 0, 0, 1)
+
+    Rectangle2_2 As rectangle:
+        BorderColor: =RGBA(255, 255, 255, 1)
+        BorderThickness: =2
+        Fill: =RGBA(0, 0, 0, 1)
+        Height: =134
+        Width: =2160.00
+        X: =0.00
+        ZIndex: =33
+
+    Image3_2 As image:
+        Height: =134
+        Image: ='house-1.1s-200px (5)'
+        OnSelect: =Navigate(Main)
+        PaddingRight: =0.00
+        PaddingTop: =0.00
+        Width: =156
+        X: =2004
+        ZIndex: =34
+
+    Label1_15 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.Verdana
+        Height: =134
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =39.53
+        Text: ="Welcome, " & User().FullName & "!"
+        Width: =1329
+        X: =173
+        ZIndex: =35
+
+    Image5_2 As image:
+        Height: =768
+        Image: ='lg.rotating-squares-preloader-gif'
+        PaddingRight: =0.00
+        PaddingTop: =0.00
+        Visible: =spinnerVar
+        Width: =2160.00
+        X: =0.00
+        ZIndex: =37
+
+    Image9_1 As image:
+        Height: =1620
+        Image: ='lg.rotating-squares-preloader-gif'
+        Visible: =spinnerVar
+        Width: =2160
+        ZIndex: =39
+
+    "GalleryDev As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        BorderColor: =RGBA(255, 255, 255, 1)
+        BorderThickness: =2
+        Height: =1380
+        Items: =SortByColumns(colOpdates, "DATE", SortOrder.Descending)
+        Layout: =Layout.Vertical
+        ShowScrollbar: =false
+        TemplatePadding: =0
+        TemplateSize: =Min(160, Self.Height - 60)
+        Width: =1931
+        X: =112
+        Y: =178
+        ZIndex: =40
+
+        Title5 As label:
+            Color: =RGBA(255, 255, 255, 1)
+            Font: =Font.Verdana
+            FontWeight: =FontWeight.Normal
+            Height: =100
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =25
+            Text: =ThisItem.DESCRIPTION
+            VerticalAlign: =VerticalAlign.Top
+            Width: =1554
+            X: =209
+            Y: =60
+            ZIndex: =2
+
+        Separator14 As rectangle:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =5
+
+        Label12 As label:
+            Color: =RGBA(255, 255, 0, 1)
+            Font: =Font.Verdana
+            Height: =37
+            OnSelect: =Select(Parent)
+            Size: =16
+            Text: =ThisItem.SUBMITTER & " on " & ThisItem.DATE
+            Width: =470
+            X: =209
+            Y: =23
+            ZIndex: =6
+
+        Image10 As image:
+            Height: =130
+            Image: =First(Filter(ImagesMMA, HeaderKey=Text(ThisItem.ID))).Thumbnail.Large
+            OnSelect: =Select(Parent)
+            Width: =173
+            X: =14
+            Y: =12
+            ZIndex: =7
+
+        Button6 As button:
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.Verdana
+            Height: =119
+            OnSelect: =Set(expandVar, true)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: ="Expand View"
+            Width: =127
+            X: =1783
+            Y: =23
+            ZIndex: =8
+
+    Image7 As image:
+        Height: =134
+        Image: ='MicrosoftTeams-image (9)'
+        Width: =173
+        ZIndex: =41
+
+    Label5 As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(255, 255, 255, 1)
+        BorderThickness: =2
+        Color: =RGBA(255, 255, 255, 1)
+        Fill: =RGBA(0, 0, 0, 1)
+        Font: =Font.Verdana
+        Height: =658
+        Overflow: =Overflow.Scroll
+        Size: =25
+        Text: =GalleryDev.Selected.DESCRIPTION
+        Visible: =expandVar
+        Width: =1931
+        X: =112
+        Y: =178
+        ZIndex: =42
+
+    Icon2 As icon.CancelBadge:
+        Color: =RGBA(184, 0, 0, 1)
+        Height: =91
+        Icon: =Icon.CancelBadge
+        OnSelect: =Set(expandVar, false)
+        Visible: =expandVar
+        Width: =117
+        X: =2043
+        Y: =178
+        ZIndex: =43
+

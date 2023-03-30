@@ -1,0 +1,145 @@
+Screen2 As screen:
+
+    "AddressInput1 As 'Address input'":
+        BorderColor: =RGBA(0, 18, 107, 1)
+        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+        DisabledFillColor: =RGBA(244, 244, 244, 1)
+        DisabledFontColor: =RGBA(166, 166, 166, 1)
+        DisplayMode: =DisplayMode.Edit
+        FillColor: =RGBA(255, 255, 255, 1)
+        Height: =70
+        HoverBorderColor: =RGBA(0, 18, 107, 1)
+        HoverFillColor: =RGBA(186, 202, 226, 1)
+        HoverFontColor: =RGBA(0, 0, 0, 1)
+        PressedBorderColor: =RGBA(0, 18, 107, 1)
+        PressedFillColor: =RGBA(255, 255, 255, 1)
+        PressedFontColor: =RGBA(0, 0, 0, 1)
+        TextColor: =RGBA(0, 0, 0, 1)
+        Width: =560
+        X: =40
+        Y: =40
+        ZIndex: =1
+
+    "Map1 As 'Map (preview)'.pcfdataset":
+        BorderColor: =RGBA(0, 18, 107, 1)
+        DisplayMode: =DisplayMode.Edit
+        Height: =799
+        InfoCards: ='Microsoft.Map.InfoCards'.OnHover
+        Items: =locations
+        ItemsLatitudes: ="Latitude"
+        ItemsLongitudes: ="Longitude"
+        OnMapClick: |-
+            =ClearCollect(colTest, {Name: "test", Latitude: Map1.ClickedLocation.Latitude, Longitude: Map1.ClickedLocation.Longitude})
+        PinColor: =RGBA(29, 114, 169, 1)
+        ShapeDrawing: =false
+        ShapeEditingDeleting: =false
+        UseRouting: =true
+        Width: =1106
+        X: =40
+        Y: =136
+        ZIndex: =2
+
+    Button4 As button:
+        Height: =70
+        OnSelect: |-
+            =If(IsBlank(AddressInput1.SearchResultJson), "", Collect(locations, {Latitude: AddressInput1.SelectedLatitude, Longitude: AddressInput1.SelectedLongitude}))
+        Text: ="Button"
+        X: =633
+        Y: =40
+        ZIndex: =3
+
+    "Gallery4 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        BorderThickness: =2
+        Height: =799
+        Items: =colTest
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =Min(160, Self.Height - 60)
+        Width: =876
+        X: =1194
+        Y: =136
+        ZIndex: =4
+
+        Image13 As image:
+            Height: =128
+            OnSelect: =Select(Parent)
+            Width: =128
+            X: =16
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =1
+
+        Title3 As label:
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: =ThisItem.Name
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - Image13.Width - 104
+            X: =Image13.X + Image13.Width + 24
+            Y: =44
+            ZIndex: =2
+
+        Subtitle1 As label:
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: |
+                =ThisItem.Latitude
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Title3.Width
+            X: =167
+            Y: =80
+            ZIndex: =3
+
+        NextArrow1 As icon.ChevronRight:
+            AccessibleLabel: =Self.Tooltip
+            Height: =60
+            Icon: =Icon.ChevronRight
+            OnSelect: =Select(Parent)
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            TabIndex: =0
+            Tooltip: ="View item details"
+            Width: =60
+            X: =Parent.TemplateWidth - Self.Width - 5
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =4
+
+        Separator5 As rectangle:
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =5
+
+        Subtitle1_1 As label:
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: |
+                =ThisItem.Longitude
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Title3.Width
+            X: =168
+            Y: =112
+            ZIndex: =6
+
+    Button4_1 As button:
+        Height: =70
+        OnSelect: =Clear(locations)
+        Text: ="Button"
+        X: =891
+        Y: =40
+        ZIndex: =5
+

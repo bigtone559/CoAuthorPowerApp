@@ -1,0 +1,65 @@
+<application xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:service="https://msmanaged-na.azure-apim.net/apim/logicflows" xmlns:siena="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11" siena:serviceId="[FINAL]ReportImageStore" xmlns="http://wadl.dev.java.net/2009/02">
+  <doc title="[FINAL]ReportImageStore" />
+  <grammars>
+    <jsonTypes targetNamespace="https://msmanaged-na.azure-apim.net/apim/logicflows" xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
+      <string name="ManualTriggerInput_Submitter_Value_def" />
+      <string name="ManualTriggerInput_Company_Value_def" />
+      <string name="ManualTriggerInput_HeaderKey_Value_def" />
+      <string name="ManualTriggerInput_HeaderKey_Value_1_def" />
+      <string name="ManualTriggerInput_Grower_Value_def" />
+      <string name="ManualTriggerInput_Name_Value_def" />
+      <string name="ManualTriggerInput_ImgBinaryData_Value_def" />
+      <boolean name="ManualTriggerInput_Signature_Value_def" />
+      <string name="ManualTriggerInput_ReportID_Value_def" />
+      <string name="ManualTriggerInput_Module_Value_def" />
+      <string name="ManualTriggerInput_Description_Value_def" />
+      <object name="ManualTriggerInput">
+        <property name="Submitter_Value" type="string" />
+        <property name="Company_Value" type="string" />
+        <property name="HeaderKey_Value" type="string" />
+        <property name="HeaderKey_Value_1" type="string" />
+        <property name="Grower_Value" type="string" />
+        <property name="Name_Value" type="string" />
+        <property name="ImgBinaryData_Value" type="string" />
+        <property name="Signature_Value" type="boolean" />
+        <property name="ReportID_Value" type="string" />
+        <property name="Module_Value" type="string" />
+        <property name="Description_Value" type="string" />
+      </object>
+    </jsonTypes>
+  </grammars>
+  <resources siena:authenticationProviderHref="#PowerAppAuth" base="https://msmanaged-na.azure-apim.net/apim/logicflows">
+    <resource path="/{connectionId}/triggers/manual/run">
+      <param style="template" name="connectionId" type="xs:string" required="true" />
+      <method siena:requiresAuthentication="true" name="POST" id="Run">
+        <doc title="Runs a logic flow trigger." />
+        <request>
+          <param style="query" name="api-version" type="xs:string" required="true" fixed="2015-02-01-preview">
+            <doc title="The api version" />
+          </param>
+          <representation mediaType="application/json">
+            <param style="plain" name="Submitter_Value" path="/Submitter_Value" type="xs:string" required="true" />
+            <param style="plain" name="Company_Value" path="/Company_Value" type="xs:string" required="true" />
+            <param style="plain" name="HeaderKey_Value" path="/HeaderKey_Value" type="xs:string" required="true" />
+            <param style="plain" name="HeaderKey_Value_1" path="/HeaderKey_Value_1" type="xs:string" required="true" />
+            <param style="plain" name="Grower_Value" path="/Grower_Value" type="xs:string" required="true" />
+            <param style="plain" name="Name_Value" path="/Name_Value" type="xs:string" required="true" />
+            <param style="plain" name="ImgBinaryData_Value" path="/ImgBinaryData_Value" type="xs:string" required="true" />
+            <param style="plain" name="Signature_Value" path="/Signature_Value" type="xs:boolean" required="true" />
+            <param style="plain" name="ReportID_Value" path="/ReportID_Value" type="xs:string" required="true" />
+            <param style="plain" name="Module_Value" path="/Module_Value" type="xs:string" required="true" />
+            <param style="plain" name="Description_Value" path="/Description_Value" type="xs:string" required="true" />
+          </representation>
+        </request>
+      </method>
+    </resource>
+  </resources>
+  <authenticationProviders xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
+    <connectionProvider id="PowerAppAuth" siena:connectionProviderId="logicflows" />
+  </authenticationProviders>
+  <template xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
+    <variable name="connectionId">
+      <modifyParams style="template" name="connectionId" attribute="fixed" />
+    </variable>
+  </template>
+</application>

@@ -1,0 +1,640 @@
+Screen1 As screen:
+    BackgroundImage: =lightblue3
+
+    Image4 As image:
+        Height: =1620
+        Image: =lightblue3
+        ImagePosition: =ImagePosition.Fill
+        Width: =2160
+        ZIndex: =1
+
+    Rectangle1_4 As rectangle:
+        BorderColor: =RGBA(0, 13, 75, 1)
+        BorderThickness: =2
+        Fill: =RGBA(255, 255, 255, 0.75)
+        Height: =210
+        Width: =931
+        X: =43
+        Y: =874
+        ZIndex: =2
+
+    Rectangle1_3 As rectangle:
+        BorderColor: =RGBA(0, 13, 75, 1)
+        BorderThickness: =2
+        Fill: =RGBA(255, 255, 255, 0.66)
+        Height: =668
+        Width: =1073
+        X: =1029
+        Y: =168
+        ZIndex: =3
+
+    Rectangle1_2 As rectangle:
+        BorderColor: =RGBA(0, 13, 75, 1)
+        BorderThickness: =2
+        Fill: =RGBA(255, 255, 255, 0.75)
+        Height: =720
+        Width: =1073
+        X: =1029
+        Y: =874
+        ZIndex: =4
+
+    Rectangle1 As rectangle:
+        BorderColor: =RGBA(0, 13, 75, 1)
+        BorderThickness: =2
+        Fill: =RGBA(255, 255, 255, 0.66)
+        Height: =668
+        Width: =925
+        X: =49
+        Y: =168
+        ZIndex: =5
+
+    InputCompany As dropdown:
+        ChevronBackground: =RGBA(0, 18, 107, 1)
+        Font: =Font.Verdana
+        Height: =51
+        Items: =["","Corp", "EE", "Group"]
+        OnChange: |-
+            =Set(compVar,InputCompany.Selected.Value);
+            
+            ClearCollect(colCompData,Filter(GrowerList,Comp=compVar))
+        PaddingRight: =15.81
+        PaddingTop: =15.81
+        Reset: =resetVar
+        Size: =20.56
+        Width: =208.73
+        X: =76
+        Y: =232
+        ZIndex: =6
+
+    InputGrower As dropdown:
+        ChevronBackground: =RGBA(0, 18, 107, 1)
+        Font: =Font.Verdana
+        Height: =51
+        Items: |-
+            =SortByColumns( ForAll(Distinct(colCompData,NAME), {Result: ThisRecord.Value}),"Result")
+        PaddingRight: =15.81
+        PaddingTop: =15.81
+        Reset: =resetVar
+        Size: =20.56
+        Width: =442
+        X: =76
+        Y: =323
+        ZIndex: =7
+
+    Label1_1 As label:
+        Font: =Font.Verdana
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =20.56
+        Text: ="Grower"
+        Width: =265.65
+        X: =76
+        Y: =283
+        ZIndex: =8
+
+    InputActivity As text:
+        Default: =""
+        Font: =Font.Verdana
+        Height: =51
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Reset: =galleryVar
+        Size: =20.56
+        Width: =442.75
+        X: =76
+        Y: =414
+        ZIndex: =9
+
+    Label1_2 As label:
+        Font: =Font.Verdana
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =20.56
+        Text: ="Activity"
+        Width: =407.96
+        X: =76
+        Y: =374
+        ZIndex: =10
+
+    InputCount As text:
+        Default: =""
+        Font: =Font.Verdana
+        Format: =TextFormat.Number
+        Height: =51
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Reset: =galleryVar
+        Size: =20.56
+        Width: =442.75
+        X: =76
+        Y: =505
+        ZIndex: =11
+
+    Label1_3 As label:
+        Font: =Font.Verdana
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =20.56
+        Text: ="Employee Count"
+        Width: =407.96
+        X: =76
+        Y: =465
+        ZIndex: =12
+
+    InputRate As text:
+        Default: =""
+        Font: =Font.Verdana
+        Format: =TextFormat.Number
+        Height: =51
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Reset: =galleryVar
+        Size: =20.56
+        Width: =442.75
+        X: =76
+        Y: =596
+        ZIndex: =13
+
+    Label1_4 As label:
+        Font: =Font.Verdana
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =20.56
+        Text: ="General Rate"
+        Width: =407.96
+        X: =76
+        Y: =556
+        ZIndex: =14
+
+    InputHours As text:
+        Default: =""
+        Font: =Font.Verdana
+        Format: =TextFormat.Number
+        Height: =51
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Reset: =galleryVar
+        Size: =20.56
+        Width: =442.75
+        X: =76
+        Y: =687
+        ZIndex: =15
+
+    Label1_5 As label:
+        Font: =Font.Verdana
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =20.56
+        Text: ="Hours"
+        Width: =407.96
+        X: =76
+        Y: =647
+        ZIndex: =16
+
+    Button1 As button:
+        BorderColor: =Color.White
+        Fill: =RGBA(136, 160, 209, 0.39)
+        Font: =Font.Verdana
+        Height: =63
+        OnSelect: |-
+            =Collect(colOpdates, {Title: "1", UID: "x", ACTIVITY: InputActivity.Text, EMPLOYEECOUNT: InputCount.Text, GENERALRATE: InputRate.Text, HOURS: InputHours.Text, COST: Value(InputCount.Text)*Value(InputRate.Text)*Value(InputHours.Text)});
+            Set(galleryVar, true);
+            Set(galleryVar, false)
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =23.72
+        Text: ="Submit"
+        Width: =442.75
+        X: =76
+        Y: =755
+        ZIndex: =17
+
+    "Gallery1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        BorderThickness: =2
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =577
+        Items: =colOpdates
+        Layout: =Layout.Vertical
+        ShowScrollbar: =false
+        TemplatePadding: =0
+        TemplateSize: =214
+        Width: =978
+        X: =1081
+        Y: =212
+        ZIndex: =18
+
+        Title1 As label:
+            Font: =Font.Verdana
+            FontWeight: =FontWeight.Normal
+            Height: =70
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0.00
+            PaddingTop: =0.00
+            Size: =25
+            Text: =ThisItem.ACTIVITY
+            VerticalAlign: =VerticalAlign.Top
+            Width: =458.57
+            X: =25.30
+            Y: =12
+            ZIndex: =2
+
+        Separator1 As rectangle:
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =630.92
+            X: =0.00
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =5
+
+        Title1_1 As label:
+            Align: =Align.Center
+            Font: =Font.Verdana
+            FontWeight: =FontWeight.Normal
+            Height: =39
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0.00
+            PaddingTop: =0.00
+            Size: =25
+            Text: =ThisItem.EMPLOYEECOUNT
+            VerticalAlign: =VerticalAlign.Top
+            Width: =162.87
+            X: =25.30
+            Y: =136
+            ZIndex: =6
+
+        Title1_2 As label:
+            Align: =Align.Center
+            Font: =Font.Verdana
+            FontWeight: =FontWeight.Normal
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0.00
+            PaddingTop: =0.00
+            Size: =25
+            Text: =ThisItem.GENERALRATE
+            VerticalAlign: =VerticalAlign.Top
+            Width: =88.55
+            X: =247
+            Y: =136
+            ZIndex: =7
+
+        Title1_3 As label:
+            Align: =Align.Center
+            Font: =Font.Verdana
+            FontWeight: =FontWeight.Normal
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0.00
+            PaddingTop: =0.00
+            Size: =25
+            Text: =ThisItem.HOURS
+            VerticalAlign: =VerticalAlign.Top
+            Width: =88.55
+            X: =395
+            Y: =136
+            ZIndex: =8
+
+        LabelTotal As label:
+            Align: =Align.Center
+            Font: =Font.Verdana
+            FontWeight: =FontWeight.Normal
+            Height: =49
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0.00
+            PaddingTop: =0.00
+            Size: =25
+            Text: ="$" & Text(ThisItem.COST, "0.00")
+            VerticalAlign: =VerticalAlign.Top
+            Width: =230
+            X: =488
+            Y: =135
+            ZIndex: =9
+
+        Title1_5 As label:
+            Font: =Font.Verdana
+            FontWeight: =FontWeight.Normal
+            Height: =54
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0.00
+            PaddingTop: =0.00
+            Size: =25
+            Text: ="Employees"
+            VerticalAlign: =VerticalAlign.Top
+            Width: =162.87
+            X: =25.30
+            Y: =85
+            ZIndex: =10
+
+        Title1_6 As label:
+            Align: =Align.Center
+            Font: =Font.Verdana
+            FontWeight: =FontWeight.Normal
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0.00
+            PaddingTop: =0.00
+            Size: =25
+            Text: ="Rate"
+            VerticalAlign: =VerticalAlign.Top
+            Width: =88.55
+            X: =247
+            Y: =85
+            ZIndex: =11
+
+        Title1_7 As label:
+            Align: =Align.Center
+            Font: =Font.Verdana
+            FontWeight: =FontWeight.Normal
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0.00
+            PaddingTop: =0.00
+            Size: =25
+            Text: ="Hours"
+            VerticalAlign: =VerticalAlign.Top
+            Width: =88.55
+            X: =395
+            Y: =85
+            ZIndex: =12
+
+        Title1_8 As label:
+            Align: =Align.Center
+            Font: =Font.Verdana
+            FontWeight: =FontWeight.Normal
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0.00
+            PaddingTop: =0.00
+            Size: =25
+            Text: ="Total"
+            VerticalAlign: =VerticalAlign.Top
+            Width: =88.55
+            X: =559
+            Y: =85
+            ZIndex: =13
+
+        Icon1 As icon.CancelBadge:
+            Height: =145
+            Icon: =Icon.CancelBadge
+            OnSelect: =Remove(colOpdates, ThisItem)
+            PaddingRight: =0.00
+            PaddingTop: =0.00
+            Width: =123
+            X: =814
+            Y: =39
+            ZIndex: =14
+
+    Label1_6 As label:
+        Align: =Align.Center
+        Font: =Font.Verdana
+        Height: =73
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =25
+        Text: |-
+            ="Do you need any of the following:"
+        Width: =925
+        X: =49
+        Y: =874
+        ZIndex: =19
+
+    CheckSafety As checkbox:
+        Font: =Font.Verdana
+        Height: =74
+        PaddingRight: =0.00
+        PaddingTop: =0.00
+        Reset: =resetVar
+        Size: =20.56
+        Text: ="Safety Support"
+        Width: =208
+        X: =49
+        Y: =964
+        ZIndex: =20
+
+    CheckPPE As checkbox:
+        Font: =Font.Verdana
+        Height: =74
+        PaddingRight: =0.00
+        PaddingTop: =0.00
+        Reset: =resetVar
+        Size: =20.56
+        Text: ="PPE"
+        Width: =120
+        X: =257
+        Y: =964
+        ZIndex: =21
+
+    CheckIT As checkbox:
+        Font: =Font.Verdana
+        Height: =74
+        PaddingRight: =0.00
+        PaddingTop: =0.00
+        Reset: =resetVar
+        Size: =20.56
+        Text: ="IT Support"
+        Width: =197.66
+        X: =377
+        Y: =964
+        ZIndex: =22
+
+    CheckPoster As checkbox:
+        Font: =Font.Verdana
+        Height: =74
+        PaddingRight: =0.00
+        PaddingTop: =0.00
+        Reset: =resetVar
+        Size: =20.56
+        Text: ="Poster Boards"
+        Width: =192.91
+        X: =621
+        Y: =964
+        ZIndex: =23
+
+    CheckOther As checkbox:
+        Font: =Font.Verdana
+        Height: =74
+        PaddingRight: =0.00
+        PaddingTop: =0.00
+        Reset: =resetVar
+        Size: =20.56
+        Text: ="Other"
+        Width: =166.03
+        X: =814
+        Y: =964
+        ZIndex: =24
+
+    Rectangle1_1 As rectangle:
+        BorderColor: =RGBA(0, 13, 75, 1)
+        BorderThickness: =2
+        Fill: =RGBA(255, 255, 255, 0.75)
+        Height: =477
+        Width: =931
+        X: =49
+        Y: =1117
+        ZIndex: =25
+
+    Label1_7 As label:
+        Align: =Align.Center
+        Font: =Font.Verdana
+        Height: =56
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =25
+        Text: ="Please provide a descriptions of the day's event"
+        Width: =925.04
+        X: =49
+        Y: =1128
+        ZIndex: =26
+
+    InputNotes As text:
+        Default: =""
+        Font: =Font.Verdana
+        Height: =368
+        Mode: =TextMode.MultiLine
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Reset: =resetVar
+        Size: =20.56
+        Width: =872.86
+        X: =76
+        Y: =1206
+        ZIndex: =27
+
+    Label1_8 As label:
+        Font: =Font.Verdana
+        Height: =65
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =20.56
+        Text: |-
+            ="Have you seen any of the following on your operation:"
+        Width: =696
+        X: =1049
+        Y: =891
+        ZIndex: =28
+
+    SprayImage As image:
+        Height: =590
+        Image: =crop2
+        PaddingRight: =0.00
+        PaddingTop: =0.00
+        Width: =789
+        X: =1049
+        Y: =984
+        ZIndex: =29
+
+    Checkbox1_5 As checkbox:
+        Font: =Font.Verdana
+        OnCheck: =Set(sprayVar, true)
+        OnUncheck: =Set(sprayVar, false)
+        PaddingRight: =0.00
+        PaddingTop: =0.00
+        Reset: =resetVar
+        Size: =20.56
+        Text: ="Yes"
+        Width: =135
+        X: =1231
+        Y: =914
+        ZIndex: =30
+
+    Checkbox1_6 As checkbox:
+        Font: =Font.Verdana
+        OnCheck: =Set(sprayVar, false)
+        OnUncheck: =Set(sprayVar, true)
+        PaddingRight: =0.00
+        PaddingTop: =0.00
+        Reset: =resetVar
+        Size: =20.56
+        Text: ="No"
+        Width: =166.03
+        X: =1366
+        Y: =914
+        ZIndex: =31
+
+    Rectangle2 As rectangle:
+        Fill: =RGBA(50, 86, 160, 0.35)
+        Height: =134
+        Width: =2160.00
+        X: =0.00
+        ZIndex: =33
+
+    Image3 As image:
+        Height: =134
+        Image: ='house-1.1s-200px (5)'
+        OnSelect: =Navigate(Main)
+        PaddingRight: =0.00
+        PaddingTop: =0.00
+        Width: =156
+        X: =2004
+        ZIndex: =34
+
+    Label1 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.Verdana
+        Height: =134
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =39.53
+        Text: ="Welcome, " & User().FullName & "!"
+        Width: =1286
+        X: =49
+        ZIndex: =35
+
+    Label1_9 As label:
+        Font: =Font.Verdana
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =20.56
+        Text: ="Company"
+        Width: =265.65
+        X: =76
+        Y: =192
+        ZIndex: =36
+
+    Image5 As image:
+        Height: =768
+        Image: ='lg.rotating-squares-preloader-gif'
+        PaddingRight: =0.00
+        PaddingTop: =0.00
+        Visible: =loadingVar
+        Width: =2160.00
+        X: =0.00
+        ZIndex: =37
+

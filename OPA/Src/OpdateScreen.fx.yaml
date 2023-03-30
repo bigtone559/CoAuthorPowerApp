@@ -1,0 +1,305 @@
+OpdateScreen As screen:
+    BackgroundImage: =lightblue3
+
+    Image4_1 As image:
+        Height: =1620
+        Image: =lightblue3
+        ImagePosition: =ImagePosition.Fill
+        Width: =2160
+        ZIndex: =1
+
+    Rectangle1_5 As rectangle:
+        BorderColor: =RGBA(0, 13, 75, 1)
+        BorderThickness: =2
+        Fill: =RGBA(255, 255, 255, 0.66)
+        Height: =1428
+        Width: =816
+        X: =49
+        Y: =168
+        ZIndex: =2
+
+    InputCompany_1 As dropdown:
+        ChevronBackground: =RGBA(136, 160, 209, 1)
+        Font: =Font.Verdana
+        Height: =98
+        Items: =["","Corp", "EE", "Group"]
+        OnChange: |-
+            =Set(compVar,InputCompany_1.Selected.Value);
+            
+            ClearCollect(colCompData,Filter(GrowerList_1,Comp=compVar))
+        PaddingRight: =15.81
+        PaddingTop: =15.81
+        Reset: =resetVar
+        Size: =45
+        Width: =630
+        X: =140
+        Y: =308
+        ZIndex: =3
+
+    InputGrower_1 As dropdown:
+        ChevronBackground: =RGBA(136, 160, 209, 1)
+        Font: =Font.Verdana
+        Height: =95
+        Items: |-
+            =SortByColumns( ForAll(Distinct(colCompData,NAME), {Result: ThisRecord.Value}),"Result")
+        PaddingRight: =15.81
+        PaddingTop: =15.81
+        Reset: =resetVar
+        Size: =25
+        Width: =630
+        X: =140
+        Y: =521
+        ZIndex: =4
+
+    Label1_12 As label:
+        Font: =Font.Verdana
+        Height: =84
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =45
+        Text: ="Grower"
+        Width: =630
+        X: =140
+        Y: =437
+        ZIndex: =5
+
+    InputActivity_1 As text:
+        Default: =""
+        Font: =Font.Verdana
+        Height: =410
+        HintText: ="Type your Opdate Here"
+        MaxLength: ="No Value"
+        Mode: =TextMode.MultiLine
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Reset: =resetVar
+        Size: =20
+        Width: =630
+        X: =142
+        Y: =951
+        ZIndex: =6
+
+    Label1_13 As label:
+        Font: =Font.Verdana
+        Height: =81
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =45
+        Text: ="Opdate"
+        Width: =630
+        X: =142
+        Y: =857
+        ZIndex: =7
+
+    Rectangle2_1 As rectangle:
+        Fill: =RGBA(50, 86, 160, 0.35)
+        Height: =134
+        Width: =2160.00
+        X: =0.00
+        ZIndex: =8
+
+    Image3_1 As image:
+        Height: =134
+        Image: ='house-1.1s-200px (5)'
+        OnSelect: =Navigate(Main)
+        PaddingRight: =0.00
+        PaddingTop: =0.00
+        Width: =156
+        X: =2004
+        ZIndex: =9
+
+    Label1_10 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.Verdana
+        Height: =134
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =39.53
+        Text: ="Welcome to the Opdates Blameless Reporting System"
+        Width: =1506
+        X: =213
+        ZIndex: =10
+
+    Label1_11 As label:
+        Font: =Font.Verdana
+        Height: =110
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =45
+        Text: ="Company"
+        Width: =630
+        X: =140
+        Y: =198
+        ZIndex: =11
+
+    Image5_1 As image:
+        Height: =1620
+        Image: ='lg.rotating-squares-preloader-gif'
+        PaddingRight: =0.00
+        PaddingTop: =0.00
+        Visible: =spinnerVar
+        Width: =2160.00
+        X: =0.00
+        ZIndex: =12
+
+    Camera1 As camera:
+        BorderColor: =RGBA(255, 255, 255, 1)
+        BorderThickness: =3
+        Camera: =0
+        Height: =739
+        OnSelect: |-
+            =If(
+                Or(
+                    IsBlank(InputGrower_1.Selected.Result), IsBlank(InputActivity_1)
+                ),
+                    Notify("Please enter all fields before Opdating", NotificationType.Error),
+            
+            Set(spinnerVar, true);
+            Set(varSK,
+            Patch(HeaderMain, Defaults(HeaderMain), {
+                Title: InputCompany_1.Selected.Value & InputGrower_1.Selected.Result & Substitute(Substitute(Substitute(User().FullName & Now()    ," ",""),"/",""),":",""),
+                COMPANY: InputCompany_1.Selected.Value,
+                GROWER: InputGrower_1.Selected.Result,
+                SUBMITTER: User().FullName,
+                DATE: Today(),
+                MODULE: "Opdates",
+                LATITUDE: Location.Latitude,
+                LONGITUDE: Location.Longitude,
+                STATUS: "Submitted",
+                DESCRIPTION: InputActivity_1.Text
+                }
+                ));
+            
+            Set(varPic5, JSON(Camera1.Photo ,JSONFormat.IncludeBinaryData))
+            ;
+            Set(varPic6,Mid(varPic5,Find(",",varPic5)+1,Len(varPic5)- Find(",",varPic5)-1  )  );
+            
+            Collect(colIncidentPicturesFinal, {Pictures: Camera1.Photo, Binary: varPic6, BinaryClean: varPic5, UID: "test" , Attachment: "test"});
+            
+            '[FINAL]ReportImageStore'.Run(User().FullName , InputCompany_1.Selected.Value , Text(varSK.ID) , Text(varSK.ID), InputGrower_1.Selected.Result , "InsertCustomValueHere" & Now() ,varPic6,false,"","Opdates", Text(varSK.ID));
+            
+            Notify("Successfully Opdated!", NotificationType.Success);
+            Set(resetVar, true);
+            Set(resetVar, false);
+            
+            Set(spinnerVar, false)
+                )
+        Width: =1178
+        X: =921
+        Y: =168
+        ZIndex: =13
+
+    Button2_2 As button:
+        BorderColor: =RGBA(0, 13, 75, 1)
+        Fill: =RGBA(136, 160, 209, 1)
+        Font: =Font.Verdana
+        Height: =146
+        OnSelect: |-
+            =If(
+                Or(
+                    IsBlank(InputGrower_1.Selected.Result), IsBlank(InputActivity_1)
+                ),
+                    Notify("Please enter all fields before Opdating", NotificationType.Error),
+            
+            Set(spinnerVar, true);
+            Set(varSK,
+            Patch(HeaderMain, Defaults(HeaderMain), {
+                Title: InputCompany_1.Selected.Value & InputGrower_1.Selected.Result & Substitute(Substitute(Substitute(User().FullName & Now()    ," ",""),"/",""),":",""),
+                COMPANY: InputCompany_1.Selected.Value,
+                GROWER: InputGrower_1.Selected.Result,
+                SUBMITTER: User().FullName,
+                DATE: Today(),
+                MODULE: "Opdates",
+                LATITUDE: Location.Latitude,
+                LONGITUDE: Location.Longitude,
+                STATUS: "Completed",
+                DESCRIPTION: InputActivity_1.Text,
+                CATEGORY: DDCategory.Selected.Value
+                }
+                ));
+            
+            ClearCollect(colTest, {UID: varSK.ID, DESCRIPTION: varSK.DESCRIPTION, Title: varSK.Title});
+            
+            Set(varPic5, JSON(Camera1.Photo ,JSONFormat.IncludeBinaryData))
+            ;
+            Set(varPic6,Mid(varPic5,Find(",",varPic5)+1,Len(varPic5)- Find(",",varPic5)-1  )  );
+            
+            Collect(colIncidentPicturesFinal, {Pictures: Camera1.Photo, Binary: varPic6, BinaryClean: varPic5, UID: "test" , Attachment: "test"});
+            
+            '[FINAL]ReportImageStore'.Run(User().FullName , InputCompany_1.Selected.Value , Text(varSK.ID) , Text(varSK.ID), InputGrower_1.Selected.Result , "InsertCustomValueHere" & Now() ,varPic6,false,"","Opdates", Text(varSK.ID));
+            
+            OpdatesTranslator.Run(JSON(colTest));
+            
+            Notify("Successfully Opdated!", NotificationType.Success);
+            Set(resetVar, true);
+            Set(resetVar, false);
+            
+            Set(spinnerVar, false)
+                )
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =45
+        Text: ="OPDATE!"
+        Width: =630
+        X: =142
+        Y: =1389
+        ZIndex: =14
+
+    Image6 As image:
+        Height: =134
+        Image: ='MicrosoftTeams-image (9)'
+        Width: =177
+        X: =36
+        Y: =3
+        ZIndex: =15
+
+    Image9 As image:
+        Height: =1620
+        Image: ='lg.rotating-squares-preloader-gif'
+        Visible: =spinnerVar
+        Width: =2160
+        ZIndex: =16
+
+    Image11 As image:
+        Height: =313
+        Image: =Camera1.Stream
+        Width: =336
+        X: =1750
+        Y: =1048
+        ZIndex: =17
+
+    DDCategory As dropdown:
+        ChevronBackground: =RGBA(136, 160, 209, 1)
+        Font: =Font.Verdana
+        Height: =98
+        Items: =["Operations", "Admin", "Management", "Safety", "Septic", "Support"]
+        OnChange: =
+        PaddingRight: =15.81
+        PaddingTop: =15.81
+        Reset: =resetVar
+        Size: =45
+        Width: =630
+        X: =142
+        Y: =737
+        ZIndex: =18
+
+    Label1_35 As label:
+        Font: =Font.Verdana
+        Height: =110
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =45
+        Text: ="Category"
+        Width: =630
+        X: =142
+        Y: =627
+        ZIndex: =19
+

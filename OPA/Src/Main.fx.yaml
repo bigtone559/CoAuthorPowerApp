@@ -1,0 +1,259 @@
+Main As screen:
+    BackgroundImage: =lightblue3
+
+    Image2 As image:
+        Height: =1620
+        Image: =gradient_color_blue_155118_1600x900
+        ImagePosition: =ImagePosition.Fill
+        Width: =2160
+        ZIndex: =1
+
+    Label2 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.Verdana
+        Height: =58
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        Size: =20.56
+        Text: |-
+            ="Last Update: " & First(Filter(PowerAppsforMakers.GetApps().value, properties.displayName = "Operations Production Application [OPA]")).properties.appVersion
+        Width: =556.60
+        X: =21
+        Y: =1561
+        ZIndex: =2
+
+    Image1 As image:
+        Height: =499
+        Image: =croppedlogo
+        PaddingRight: =0.00
+        PaddingTop: =0.00
+        Width: =2160.00
+        X: =0.00
+        Y: =276
+        ZIndex: =3
+
+    Button2_3 As button:
+        BorderColor: =Color.White
+        Fill: =RGBA(0, 0, 0, 0)
+        Font: =Font.Verdana
+        Height: =161
+        OnSelect: |-
+            =Navigate(ReviewOpdateScreen);
+            Refresh(HeaderMain);
+            
+            ClearCollect(
+                colOpdates, Filter(
+                    HeaderMain, MODULE="Opdates"
+                )
+            )
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =55.34
+        Text: ="DEV VIEW"
+        Visible: |-
+            =If(
+                Or(
+                    User().FullName="Christopher Silva", User().FullName="Tony Randles", User().FullName="Julia Soliz", User().FullName="Octavio Flores"), true, false)
+        Width: =629
+        X: =1437
+        Y: =1416
+        ZIndex: =4
+
+    Button2_7 As button:
+        BorderColor: =Color.White
+        Fill: =RGBA(0, 0, 0, 0)
+        Font: =Font.Verdana
+        Height: =161
+        OnSelect: |-
+            =Navigate(RequestMaterialsScreen);
+            
+            ClearCollect(
+                colOpdates, Filter(
+                    HeaderMain, MODULE="Opdates"
+                )
+            )
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =45
+        Text: =If(spanVar=false, "Make a Request", "Hacer una solicitud")
+        Width: =626
+        X: =762
+        Y: =855
+        ZIndex: =5
+
+    Button2_8 As button:
+        BorderColor: =Color.White
+        Fill: =RGBA(0, 0, 0, 0)
+        Font: =Font.Verdana
+        Height: =161
+        OnSelect: |-
+            =Navigate(MyRequestsScreen);
+            Refresh(RequestHeader);
+            
+            ClearCollect(
+                colMyRequests2,
+                Filter(
+                    RequestHeader, Submitter=User().FullName
+                )
+            )
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =40
+        Text: =If(spanVar=false, "View My Requests", "Ver mis solicitudes")
+        Width: =626
+        X: =762
+        Y: =1047
+        ZIndex: =6
+
+    Checkbox2 As checkbox:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        CheckboxSize: =80
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.Verdana
+        Height: =72
+        HoverBorderColor: =Color.White
+        HoverColor: =RGBA(255, 255, 255, 1)
+        OnCheck: =Set(spanVar, true)
+        OnUncheck: =Set(spanVar, false)
+        PressedBorderColor: =Color.White
+        PressedColor: =RGBA(255, 255, 255, 1)
+        Size: =35
+        Text: ="Spanish"
+        Width: =443
+        X: =21
+        Y: =21
+        ZIndex: =7
+
+    Label3_2 As label:
+        Align: =Align.Center
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.Verdana
+        Height: =140
+        Size: =70
+        Text: ="Operations Production Application"
+        Width: =2160
+        Y: =105
+        ZIndex: =8
+
+    Button2_11 As button:
+        BorderColor: =Color.White
+        Fill: =RGBA(0, 0, 0, 0)
+        Font: =Font.Verdana
+        Height: =161
+        OnSelect: |-
+            =Navigate(POScreen);
+            Refresh(RequestHeader);
+            
+            ClearCollect(
+                colMyRequests2,
+                Filter(
+                    RequestHeader, Submitter=User().FullName
+                )
+            )
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =40
+        Text: =If(spanVar=false, "P.O. Request", "P.O. Request")
+        Width: =626
+        X: =1437
+        Y: =855
+        ZIndex: =9
+
+    Button2_12 As button:
+        BorderColor: =Color.White
+        Fill: =RGBA(0, 0, 0, 0)
+        Font: =Font.Verdana
+        Height: =161
+        OnSelect: |-
+            =Navigate(MyPOScreen);
+            Refresh(RequestHeader);
+            
+            ClearCollect(
+                colMyRequests2,
+                Filter(
+                    RequestHeader, Submitter=User().FullName
+                )
+            )
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =40
+        Text: =If(spanVar=false, "View My P.O.", "My P.O.")
+        Width: =626
+        X: =1437
+        Y: =1047
+        ZIndex: =10
+
+    Image15_1 As image:
+        Height: =371
+        Image: =construction
+        Visible: =If(Or(User().FullName="Julia Soliz", User().FullName="Christopher Silva", User().FullName="Tony Randles"), false, true)
+        Width: =781
+        X: =1359
+        Y: =837
+        ZIndex: =12
+
+    Button2 As button:
+        BorderColor: =Color.White
+        Fill: =RGBA(0, 0, 0, 0)
+        Font: =Font.Verdana
+        Height: =161
+        OnSelect: =Navigate(OpdateScreen)
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =55.34
+        Text: ="OPDATES™"
+        Width: =626
+        X: =94
+        Y: =855
+        ZIndex: =13
+
+    Button2_1 As button:
+        BorderColor: =Color.White
+        Fill: =RGBA(0, 0, 0, 0)
+        Font: =Font.Verdana
+        Height: =161
+        OnSelect: |-
+            =Navigate(ReviewOpdateScreen);
+            
+            ClearCollect(
+                colOpdates, Filter(
+                    HeaderMain, SUBMITTER=User().FullName, MODULE="Opdates"
+                )
+            )
+        PaddingRight: =7.91
+        PaddingTop: =7.91
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =40
+        Text: =If(spanVar=false, "View My Opdates", "Ver mis Opdates")
+        Width: =626
+        X: =94
+        Y: =1047
+        ZIndex: =14
+
